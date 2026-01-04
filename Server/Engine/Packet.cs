@@ -2604,7 +2604,7 @@ namespace Server.Network
 				packedBuffer = new byte[wantLength];
 			}
 
-			if (Compression.Pack(buffer.AsSpan(0, length), packedBuffer, out var packedLength))
+			if (!Compression.Pack(buffer.AsSpan(0, length), packedBuffer, out var packedLength))
 			{
 				packedLength = length = 0;
 			}
@@ -3161,6 +3161,7 @@ namespace Server.Network
             m_Stream.Write((byte)delay);
         }
     }
+
 
     public sealed class MobileStatusCompact : Packet
 	{
